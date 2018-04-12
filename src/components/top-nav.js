@@ -7,12 +7,12 @@ export default function TopNav(props) {
         <nav>
             <ul className="clearfix">
                 <li>
-                    <a className="what" href="#">
+                    <a className="what" href="#" onClick={()=>props.toggleModal()}>
                         What?
                     </a>
                 </li>
                 <li>
-                    <a className="new" href="#">
+                    <a className="new" href="#" onClick={()=>props.restartGame()}>
                         + New Game
                     </a>
                 </li>
@@ -20,4 +20,3 @@ export default function TopNav(props) {
         </nav>
     );
 }
-

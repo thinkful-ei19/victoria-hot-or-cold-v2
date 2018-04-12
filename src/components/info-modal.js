@@ -4,7 +4,7 @@ import './info-modal.css';
 
 export default function InfoModal(props) {
     return (
-        <div className="overlay" id="modal">
+        <div className="overlay" id="modal" style={{'display':(props.visability)?'block':'none'}}>
             <div className="content">
                 <h3>What do I do?</h3>
                 <div>
@@ -15,7 +15,7 @@ export default function InfoModal(props) {
                         <li>3. You will <strong>get feedback</strong> on how close ("hot") or far ("cold") your guess is.</li>
                     </ul>
                     <p>So, Are you ready?</p>
-                    <a className="close" href="#">Got It!</a>
+                    <a className="close" href="#" onClick={()=>props.toggleModal()}>Got It!</a>
                 </div>
             </div>
         </div>
