@@ -13,21 +13,18 @@ class Game extends Component {
     this.state = {
       guesses: [],
       guess: null,
-      count: null,
       randomNum: Math.floor(Math.random() * 100 + 1),
       feedback: 'Make your guess!',
       modal: false
     }
   }
 
-  onSubmit(userGuess){
-     const guesses = [...this.state.guesses, userGuess];
+  onSubmit=(userGuess)=>{
      const num = Math.abs(this.state.randomNum - userGuess)
-    this.setState({
-      guess: userGuess,
-      guesses: guesses,
-      count: guesses.length
-    })
+     this.setState((prevState, props) => (
+       { guess: userGuess,
+         guesses: [...prevState.guesses, userGuess] }
+     ))
     if( this.state.randomNum.toString() === userGuess) {
       this.setState({
         feedback: 'winner winner chicken dinner'
@@ -43,17 +40,16 @@ class Game extends Component {
     }
   }
 
-  showModal(){
+  showModal=()=>{
     this.setState({
       modal: !this.state.modal
     })
   }
 
-  resetGame(){
+  resetGame=()=>{
     this.setState({
       guesses: [],
       guess: null,
-      count: null,
       randomNum: Math.floor(Math.random() * 100 + 1),
       feedback: 'Make your guess!',
       modal: false
@@ -64,9 +60,9 @@ class Game extends Component {
 
     return (
         <div>
-            <Header visability={this.state.modal} toggleModal={()=>this.showModal()} restartGame={()=>this.resetGame()}/>
+            <Header visability={this.state.modal} toggleModal={this.showModal} restartGame={this.resetGame}/>
             <GuessSection feedback={this.state.feedback} onSubmit={(userGuess)=>this.onSubmit(userGuess)}/>
-            <GuessCount count={this.state.count} />
+            <GuessCount count={this.state.guesses.length} />
             <GuessList guesses={this.state.guesses} />
         </div>
       );
